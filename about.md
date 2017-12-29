@@ -8,5 +8,5 @@ Having spent the majority of his life as a professional musician, David Luther i
 
 ### Contact Me
  
-[davidrluther@gmail.com](mailto:davidrluther@gmail.com)
+[davidrluther@gmail.com](mailto:davidrluther@gmail.com)  
 [Music Website](http://davidluthermusic.com) 
