@@ -1,3 +1,8 @@
+---
+layout: post
+title: Metis Project 5 — Sax | Not Sax (Teaser)
+---
+
 As a professional musician in my former life, the saxophone paid my rent. Thus, I thought it fitting to pay it tribute for this project, and see if I could train a convolutional neural network to detect its presence in audio clips. I created a volume of 24,000 audio samples from several hundred songs in my library, logging a record of each one in a MongoDB database at the time of creation. To label these samples, I wrote a web app using Flask and JavaScript, which I then hosted at [audiosamplelabeler.com](http://audiosamplelabeler.com) so anyone anywhere could pitch in and assist in the labeleing effort. As of 12/8/17, 2,000 out of 24,000 samples have been labeled, and the effort will continue indefinitely.
 
 Thankfully, 2,000 labeled samples turned out to be enough to train and test a PoC neural net classifier model. To build the model, I turned to [PyTorch](http://pytorch.org), which makes up for a steeper learning curve and relatively sparse documentation with a high degree of customizability and sheer power. I trained and tested on 128px x 108px spectrograms, which allowed for relatively quick training, and enough information for the model to start picking out patterns.
