@@ -8,8 +8,8 @@ Having spent the majority of his life as a professional musician, David Luther i
 
 ### Links and Contact
 
-[LinkedIn](https://linkedin.com/in/davidrluther)
-[GitHub](https://github.com/davidluther)
-[Twitter](https://twitter.com/uncleheavy)
-[Music Website](http://davidluthermusic.com)
+[LinkedIn](https://linkedin.com/in/davidrluther)  
+[GitHub](https://github.com/davidluther)  
+[Twitter](https://twitter.com/uncleheavy)  
+[Music Website](http://davidluthermusic.com)  
 [davidrluther@gmail.com](mailto:davidrluther@gmail.com)
