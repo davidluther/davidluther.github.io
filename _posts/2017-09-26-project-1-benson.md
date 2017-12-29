@@ -19,7 +19,7 @@ To that end, we employed the Google Maps API to pinpoint the exact location (lat
 
 Though the MTA dataset appeared to be remarkably clean, there were a handful of challenges that had to be addressed before we could arrive at any meaningful calculation of total station traffic. Those I will address here include how best to sort the data, what constitutes a unique station and how exactly to determine that, and how best to filter out invalid traffic measurements.
 
-For reference, here are several sample rows of the raw turnstile upon loading into pandas:
+For reference, here are several sample rows of the raw turnstile data upon loading into pandas:
 
 ![10 rows of raw data](/images/metis_p1/01_raw.png)
 
@@ -124,13 +124,13 @@ The more tech companies and colleges in direct proximity to any given station, t
 * 0.25-0.5 mi – 0.75 points
 * 0.5-0.75 mi – 0.5 points
 * 0.75-1 mi – 0.25 points
-* > 1 mi – 0 points
+* Greater than 1 mi – 0 points
 
 We assume that there are minimal cases where someone would elect to walk to a station more than a mile away, given the large chance of a more relevant option existing closer, thus the 0 for any distance greater than that. All points are added up per station, providing its proximity weight. 
 
 This is all achieved by feeding a weighting function to the `.apply()` method on the traffic dataframe, which allows us to perform the same operation on each row of the dataframe — or the data for each station, in this case. The function takes the latitude and longitude of each station, iterates through the latitude and longitude of each company/college, calculates the distance and then feeds that to another function that returns a point value, sums all points for the station, and returns the proximity weight as a number that we then feed into a new column.
 
-![Dataframe Top 10 Weights](/images/01_top10weights.png)
+![Dataframe Top 10 Weights](/images/metis_p1/01_top10weights.png)
 
 ## Station Relevance
 
@@ -152,6 +152,6 @@ Not knowing the extent of our client's promotional capabilities (e.g. number of 
 
 ## Other Thoughts
 
-Clearly, the main focus of this project was to work with the turnstile data set in Pandas, to gain experience in exploring and cleaning a large dataset, and that objective was certainly met. I kept thinking throughout, though, that the total traffic of a station might be irrelevant in this situation, and that the quality of the traffic of utmost importance. High traffic may actually have diminishing returns, given a large flood of people focused only on getting down the stairs, onto the platform, and into the train. Of course, traffic needs to be present, but if there are numerous companies around a particular station, that station will have traffic. Were I only charged with addressing the question, I would focus on building a comprehensive list of relevant companies, perhaps from 100-500, and weighting stations based on proximity alone. I would also try to grab such a list from a pre-existing dataset, as opposed to building it manually.
+Clearly, the main focus of this project was to work with the turnstile data set in Pandas, to gain experience in exploring and cleaning a large dataset, and that objective was certainly met. I kept thinking throughout, though, that the total traffic of a station might be irrelevant in this situation, and that the quality of the traffic per station would be of utmost importance. High traffic may actually have diminishing returns, given a large flood of people focused only on getting down the stairs, onto the platform, and into the train. Of course, traffic needs to be present, but if there are numerous companies around a particular station, that station will have traffic. Were I only charged with addressing the question, I would focus on building a comprehensive list of relevant companies, perhaps from 100-500, and weighting stations based on proximity alone. I would also try to derive such a list from a pre-existing dataset, as opposed to building it manually.
 
 I don't completely trust the results of the Google Maps API either, and would want to review them further before standing by their complete accuracy in providing proximity weighting. Given the mishap with the 23rd St station, I wonder how many other stations were similarly affected, or if the right results were returned for all the companies and colleges. The current approach also doesn't factor in the possibility of multiple offices or campuses per company. With more time, I would have tried to validate each location in some way, or figure out how to merge available subway location information with the turnstile data. Building a comprehensive list of company office addresses to search would be a more reliable way about it as well.
