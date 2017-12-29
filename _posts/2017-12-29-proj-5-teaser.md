@@ -22,3 +22,5 @@ After training on the full train set and testing on train and test, I was able t
 3. Use higher-resolution spectrograms, which may or may not be helpful due to more information.
 4. Experiment with the transfer learning options offered by PyTorch, since my data is limited, even with 24,000 samples.
 5. Move to GPUs to greatly accelerate the process of model selection and training.
+
+A more in-depth series of posts on this project will be coming soon.
