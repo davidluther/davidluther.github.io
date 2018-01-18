@@ -1,6 +1,17 @@
 ---
 layout: post
-title: Saxophone Detector: Building the Dataset
+title: Sax | Not Sax — Building the Dataset
 ---
 
-As introduced in my last post, I decided to train a convolutional neural network to recognize the presence of saxophone in audio clips for my final 
+As introduced in [my last post](https://davidluther.github.io/proj-5-teaser/), I decided to train a convolutional neural network to recognize the presence of saxophone in audio clips for my final Metis project. To do this, I would need a sizable set of audio clips, all properly labeled with respect to their saxophone content. And as any DIYer would think, I decided to create this dataset myself, because, with a three-week timeline, what could go wrong with that?
+
+A quick search for pre-existing datasets for instrument recognition had turned up a couple options: [NSynth](https://magenta.tensorflow.org/datasets/nsynth) and [IRMAS](https://www.upf.edu/web/mtg/irmas). NSynth, an offering of Google Brain's [Magenta](https://magenta.tensorflow.org/welcome-to-magenta) project, contains 305,979 single-note samples generated from 1,006 different instruments sourced from commercial sample libraries, and serves as much as a resource for music generation as it does for instrument recognition. I was more interested in seeing if a saxophone could be identified in its natural habitat, with natural phrasing and pitch-bending choices perhaps being as indicitave as the instrument's harmonic signature, so bookmarked this for future interest and moved on.
+
+IRMAS seemed better-suited for my needs, with a training set of 6705 excerpts and a test set of 2874. Each 3-second sample filename in the training set is labeled with one of 11 primary instruments, and sometimes with the presence of drums and genre. Of the training samples, 626 contain saxophone primarily. I could've just gone with it. But the challenge of DIYing my way to a saxophone recognition dataset won out; at least there was a backup.
+
+My first attempts involved me, Logic, and a variety of tracks from my collection known to contain saxophone or not. I manually selected five-second intervals of each track, then saved each with an ID number and two-letter label in each filename: "ss" for sax solo, "ns" for no sax, and "sc" for sax-in-section, a la `ss0023.wav`. Each category of samples lived in its own folder. I put out a plea on the socials for anyone with a decent ear, digital audio files, and the means to chop them up to take a few minutes and send me a scattering of samples in each category.
+
+After one day, with assistance from one other person, I had all of 58 samples. Clearly, this was not going to work. Though each five-second clip was surgically precise as to its audio contents, I needed thousands of labeled samples — or tens of thousands, even better — and quickly. Moreover, I wondered, what if I wanted to label these same samples with presence of piano? Or voice? Or any other instruments? I needed something more robust than the label-in-filename/categories-in-folders approach.
+
+The second phase of this effort took shape. First, I would use the Python audio library [Librosa](https://librosa.github.io/) to import audio files, and Numpy to chop each one of them into as many five-second samples as could be provided. Second, as each sample was saved with a six-digit ID number as its filename, a document in a remote MongoDB database would be created using the same unique ID number. Third, I would write a web app using Flask (and as little JavaScript as possible) to facilitate the actual labeling. Fourth and finally, I would host this on a public website and circulate to musical communities far and wide, where some number of people would selflessly take on the labeling burden. If 50 people each labeled 50 samples, I'd have 2500 in the dataset. This seemed entirely possible.
+
